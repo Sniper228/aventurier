@@ -1,0 +1,11 @@
+backend
+fourniture
+.agents
+.claude
+skills-lock.json
+**/.git
+**/node_modules
+**/.next
+**/vendor
+*.md
+!README.md
