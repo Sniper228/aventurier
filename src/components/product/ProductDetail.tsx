@@ -16,6 +16,7 @@ import { ProductCard } from "@/components/shop/ProductCard";
 import { useCartStore } from "@/store/cart";
 import { useFavoritesStore } from "@/store/favorites";
 import { useCompareStore } from "@/store/compare";
+import { useUiStore } from "@/store/ui";
 
 const mockReviews = [
   {
@@ -47,6 +48,7 @@ export function ProductDetail({
   const [color, setColor] = useState(product.colors[0]);
   const [zoomed, setZoomed] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
+  const openCart = useUiStore((s) => s.openCart);
   const toggleFavorite = useFavoritesStore((s) => s.toggle);
   const isFavorite = useFavoritesStore((s) => s.has(product.id));
   const toggleCompare = useCompareStore((s) => s.toggle);
@@ -182,7 +184,10 @@ export function ProductDetail({
             <Button
               variant="primary"
               size="lg"
-              onClick={() => addItem(product, { size, color })}
+              onClick={() => {
+                addItem(product, { size, color });
+                openCart();
+              }}
             >
               Ajouter au panier
             </Button>

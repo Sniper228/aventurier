@@ -13,6 +13,7 @@ import { StarRating } from "@/components/ui/StarRating";
 import { useFavoritesStore } from "@/store/favorites";
 import { useCompareStore } from "@/store/compare";
 import { useCartStore } from "@/store/cart";
+import { useUiStore } from "@/store/ui";
 
 export function ProductCard({ product }: { product: Product }) {
   const toggleFavorite = useFavoritesStore((s) => s.toggle);
@@ -20,6 +21,7 @@ export function ProductCard({ product }: { product: Product }) {
   const toggleCompare = useCompareStore((s) => s.toggle);
   const isCompared = useCompareStore((s) => s.has(product.id));
   const addItem = useCartStore((s) => s.addItem);
+  const openCart = useUiStore((s) => s.openCart);
 
   return (
     <article className="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface p-2 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:border-accent/40 hover:shadow-[0_24px_60px_rgba(0,163,255,0.12)]">
@@ -117,12 +119,13 @@ export function ProductCard({ product }: { product: Product }) {
 
         <button
           type="button"
-          onClick={() =>
+          onClick={() => {
             addItem(product, {
               size: product.sizes[0],
               color: product.colors[0],
-            })
-          }
+            });
+            openCart();
+          }}
           className="flex w-full items-center justify-center gap-2 rounded-full bg-white/5 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-accent hover:text-zinc-950"
         >
           <ShoppingBag className="h-4 w-4" />

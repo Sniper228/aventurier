@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SearchModal } from "@/components/layout/SearchModal";
 import { FloatingWidgets } from "@/components/layout/FloatingWidgets";
+import { CartDrawer } from "@/components/layout/CartDrawer";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
@@ -11,6 +12,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <main className="flex-1">{children}</main>
       <Footer />
       <SearchModal />
+      <CartDrawer />
       <FloatingWidgets />
     </>
   );

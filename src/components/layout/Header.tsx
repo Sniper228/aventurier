@@ -34,7 +34,8 @@ export function Header() {
   const reduce = useReducedMotion();
   const cartCount = useCartStore((s) => s.totalItems());
   const favoritesCount = useFavoritesStore((s) => s.ids.length);
-  const { mobileMenuOpen, setMobileMenuOpen, setSearchOpen } = useUiStore();
+  const { mobileMenuOpen, setMobileMenuOpen, setSearchOpen, openCart } =
+    useUiStore();
 
   useEffect(() => {
     setMounted(true);
@@ -117,9 +118,10 @@ export function Header() {
                 </span>
               ) : null}
             </Link>
-            <Link
-              href="/panier"
+            <button
+              type="button"
               aria-label="Panier"
+              onClick={openCart}
               className="relative flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10"
             >
               <ShoppingBag className="h-5 w-5" />
@@ -128,7 +130,7 @@ export function Header() {
                   {cartCount}
                 </span>
               ) : null}
-            </Link>
+            </button>
             <Link
               href="/compte"
               aria-label="Compte"
